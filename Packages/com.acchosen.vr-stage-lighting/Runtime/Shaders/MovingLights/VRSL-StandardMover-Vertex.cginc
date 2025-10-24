@@ -804,9 +804,9 @@ v2f vert (appdata v)
 
 
 #if defined(VOLUMETRIC_YES)
-fixed4 frag (v2f i, fixed facePos : VFACE) : SV_Target
+fixed4 frag (v2f i, bool facePos : SV_IsFrontFace) : SV_Target
 {
-	return VolumetricLightingBRDF(i, facePos);
+	return VolumetricLightingBRDF(i, facePos?1:0);
 }
 #endif
 #if !defined(VOLUMETRIC_YES)				
