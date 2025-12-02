@@ -105,7 +105,7 @@ namespace VRSL
          Tooltip("The main color of the light.")
         ]
         private Color lightColorTint = Color.white * 2.0f;
-        [SerializeField, FieldChangeCallback(nameof(LightColorTintAnimated)), ColorUsage(false, true),
+        [SerializeField, FieldChangeCallback(nameof(LightColorTintAnimated)),
          Tooltip("Should the shader use the Animated Light Color?")
         ]
         private bool lightColorTintAnimated = false;

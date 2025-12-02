@@ -103,6 +103,13 @@ namespace VRSL
 #endif
         ]
         private Color lightColorTint = Color.white * 2.0f;
+        [SerializeField, 
+#if UDONSHARP
+         FieldChangeCallback(nameof(LightColorTintAnimated)),
+#endif
+         Tooltip("Should the shader use the Animated Light Color?")
+        ]
+        private bool lightColorTintAnimated = false;
 
 
         [SerializeField,
@@ -228,6 +235,7 @@ namespace VRSL
         private float previousConeWidth, previousConeLength, previousGlobalIntensity, previousFinalIntensity, previousConeFlatness, previousConeXRotation, previousConeYRotation, previousConeZRotation, previousLaserThickness, previousLaserScroll;
         private int previousLaserCount;
         private Color previousColorTint;
+        private bool previousColorTintAnimated;
         MaterialPropertyBlock props;
 
         [HideInInspector]
@@ -309,6 +317,19 @@ namespace VRSL
             {
                 previousColorTint = lightColorTint;
                 lightColorTint = value;
+                _UpdateInstancedProperties();
+            }
+        }
+        public bool LightColorTintAnimated
+        {
+            get
+            {
+                return lightColorTintAnimated;
+            }
+            set
+            {
+                previousColorTintAnimated = lightColorTintAnimated;
+                lightColorTintAnimated = value;
                 _UpdateInstancedProperties();
             }
         }
@@ -567,6 +588,7 @@ namespace VRSL
             props.SetInt("_ThemeColorTarget", themeColorTarget);
             //General Light Stuff
             props.SetColor("_Emission", lightColorTint);
+            props.SetInt("_UseAnimatedEmission", lightColorTintAnimated?1:0);
             props.SetFloat("_VertexConeWidth", coneWidth);
             props.SetFloat("_GlobalIntensity", globalIntensity);
             props.SetFloat("_FinalIntensity", finalIntensity);
