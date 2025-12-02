@@ -32,6 +32,29 @@ namespace VRSL
     public class VRStageLighting_AudioLink_Static : MonoBehaviour
 #endif
     {
+        // ReSharper disable InconsistentNaming
+        private readonly int TextureColorSampleX = Shader.PropertyToID("_TextureColorSampleX");
+        private readonly int TextureColorSampleY = Shader.PropertyToID("_TextureColorSampleY");
+        private readonly int EnableColorTextureSample = Shader.PropertyToID("_EnableColorTextureSample");
+        private readonly int UseTraditionalSampling = Shader.PropertyToID("_UseTraditionalSampling");
+        private readonly int EnableThemeColorSampling = Shader.PropertyToID("_EnableThemeColorSampling");
+        private readonly int ColorTarget = Shader.PropertyToID("_ThemeColorTarget");
+        private readonly int Link = Shader.PropertyToID("_EnableAudioLink");
+        private readonly int EnableColorChord = Shader.PropertyToID("_EnableColorChord");
+        private readonly int Delay1 = Shader.PropertyToID("_Delay");
+        private readonly int Multiplier = Shader.PropertyToID("_BandMultiplier");
+        private readonly int Band1 = Shader.PropertyToID("_Band");
+        private readonly int EnableSpin = Shader.PropertyToID("_EnableSpin");
+        private readonly int Speed = Shader.PropertyToID("_SpinSpeed");
+        private readonly int ProjectionSelection = Shader.PropertyToID("_ProjectionSelection");
+        private readonly int Emission = Shader.PropertyToID("_Emission");
+        private readonly int UseAnimatedEmission = Shader.PropertyToID("_UseAnimatedEmission");
+        private readonly int Width = Shader.PropertyToID("_ConeWidth");
+        private readonly int Intensity = Shader.PropertyToID("_GlobalIntensity");
+        private readonly int FinalIntensity1 = Shader.PropertyToID("_FinalIntensity");
+        private readonly int Length = Shader.PropertyToID("_ConeLength");
+        private readonly int MaxConeLength1 = Shader.PropertyToID("_MaxConeLength");
+        // ReSharper restore InconsistentNaming
         //////////////////Public Variables////////////////////
 
         [Header("Audio Link Settings")]
@@ -634,13 +657,13 @@ namespace VRSL
         MaterialPropertyBlock _SetFinalIntensityComponents(MaterialPropertyBlock props, MeshRenderer renderer){
             if(!finalIntensityComponentMode){return props;}
                 if(renderer.gameObject.name.Contains("Volume") || renderer.gameObject.name.Contains("volume") || renderer.gameObject.name.Contains("Flare") || renderer.gameObject.name.Contains("flare")){
-                    props.SetFloat("_FinalIntensity", finalIntensityVolumetric);
+                    props.SetFloat(FinalIntensity1, finalIntensityVolumetric);
                 }
                 else if(renderer.gameObject.name.Contains("Project") || renderer.gameObject.name.Contains("project")){
-                    props.SetFloat("_FinalIntensity", finalIntensityProjection);
+                    props.SetFloat(FinalIntensity1, finalIntensityProjection);
                 }
                 else{
-                    props.SetFloat("_FinalIntensity", finalIntensityFixture);
+                    props.SetFloat(FinalIntensity1, finalIntensityFixture);
                 }
             return props;
         }
@@ -659,38 +682,38 @@ namespace VRSL
                 }
             }
             //Color Texture Sampling
-            props.SetFloat("_TextureColorSampleX", textureSamplingCoordinates.x);
-            props.SetFloat("_TextureColorSampleY", textureSamplingCoordinates.y);
-            props.SetInt("_EnableColorTextureSample", enableColorTextureSampling == true ? 1 : 0);
-            props.SetInt("_UseTraditionalSampling", traditionalColorTextureSampling == true ? 1 : 0);
-            props.SetInt("_EnableThemeColorSampling", enableThemeColorSampling == true ? 1 : 0);
-            props.SetInt("_ThemeColorTarget", themeColorTarget);
+            props.SetFloat(TextureColorSampleX, textureSamplingCoordinates.x);
+            props.SetFloat(TextureColorSampleY, textureSamplingCoordinates.y);
+            props.SetInt(EnableColorTextureSample, enableColorTextureSampling == true ? 1 : 0);
+            props.SetInt(UseTraditionalSampling, traditionalColorTextureSampling == true ? 1 : 0);
+            props.SetInt(EnableThemeColorSampling, enableThemeColorSampling == true ? 1 : 0);
+            props.SetInt(ColorTarget, themeColorTarget);
 
             //AudioLink Stuff
-            props.SetFloat("_EnableAudioLink", enableAudioLink == true ? 1.0f : 0.0f);
-            props.SetInt("_EnableColorChord", enableColorChord == true ? 1 : 0);
+            props.SetFloat(Link, enableAudioLink == true ? 1.0f : 0.0f);
+            props.SetInt(EnableColorChord, enableColorChord == true ? 1 : 0);
             //props.SetFloat("_NumBands", spectrumBands.Length);
-            props.SetFloat("_Delay", delay);
-            props.SetFloat("_BandMultiplier", bandMultiplier);
+            props.SetFloat(Delay1, delay);
+            props.SetFloat(Multiplier, bandMultiplier);
             int b = (int) band;
             float ba = 1.0f * b;
-            props.SetFloat("_Band", ba);
+            props.SetFloat(Band1, ba);
             //Movement Stuff
             // props.SetInt("_PanInvert", invertPan == true ? 1 : 0);
             // props.SetInt("_TiltInvert", invertTilt == true ? 1 : 0);
-            props.SetInt("_EnableSpin", enableAutoSpin == true ? 1 : 0);
-            props.SetFloat("_SpinSpeed", spinSpeed);
+            props.SetInt(EnableSpin, enableAutoSpin == true ? 1 : 0);
+            props.SetFloat(Speed, spinSpeed);
             // props.SetFloat("_FixtureRotationX", tiltOffsetBlue);
             // props.SetFloat("_FixtureBaseRotationY", panOffsetBlueGreen);
             //Other Stuff
-            props.SetInt("_ProjectionSelection", selectGOBO);
-            props.SetColor("_Emission", lightColorTint);
-            props.SetInt("_UseAnimatedEmission", lightColorTintAnimated?1:0);
-            props.SetFloat("_ConeWidth", coneWidth);
-            props.SetFloat("_GlobalIntensity", globalIntensity);
-            props.SetFloat("_FinalIntensity", finalIntensity);
-            props.SetFloat("_ConeLength", Mathf.Abs(coneLength - 10.0f));
-            props.SetFloat("_MaxConeLength", maxConeLength);
+            props.SetInt(ProjectionSelection, selectGOBO);
+            props.SetColor(Emission, lightColorTint);
+            props.SetInt(UseAnimatedEmission, lightColorTintAnimated?1:0);
+            props.SetFloat(Width, coneWidth);
+            props.SetFloat(Intensity, globalIntensity);
+            props.SetFloat(FinalIntensity1, finalIntensity);
+            props.SetFloat(Length, Mathf.Abs(coneLength - 10.0f));
+            props.SetFloat(MaxConeLength1, maxConeLength);
             // for(int i = 0; i < objRenderers.Length; i++)
             // {
             //     objRenderers[i].SetPropertyBlock(props);
@@ -757,37 +780,38 @@ namespace VRSL
                 }
             }
             //Color Texture Sampling
-            props.SetFloat("_TextureColorSampleX", textureSamplingCoordinates.x);
-            props.SetFloat("_TextureColorSampleY", textureSamplingCoordinates.y);
-            props.SetInt("_EnableColorTextureSample", enableColorTextureSampling == true ? 1 : 0);
-            props.SetInt("_UseTraditionalSampling", traditionalColorTextureSampling == true ? 1 : 0);
-            props.SetInt("_EnableThemeColorSampling", enableThemeColorSampling == true ? 1 : 0);
-            props.SetInt("_ThemeColorTarget", themeColorTarget);
+            props.SetFloat(TextureColorSampleX, textureSamplingCoordinates.x);
+            props.SetFloat(TextureColorSampleY, textureSamplingCoordinates.y);
+            props.SetInt(EnableColorTextureSample, enableColorTextureSampling ? 1 : 0);
+            props.SetInt(UseTraditionalSampling, traditionalColorTextureSampling ? 1 : 0);
+            props.SetInt(EnableThemeColorSampling, enableThemeColorSampling ? 1 : 0);
+            props.SetInt(ColorTarget, themeColorTarget);
 
             //AudioLink Stuff
-            props.SetFloat("_EnableAudioLink", 0.0f);
-            props.SetInt("_EnableColorChord", 0);
+            props.SetFloat(Link, 0.0f);
+            props.SetInt(EnableColorChord, 0);
             //props.SetFloat("_NumBands", spectrumBands.Length);
-            props.SetFloat("_Delay", delay);
-            props.SetFloat("_BandMultiplier", bandMultiplier);
+            props.SetFloat(Delay1, delay);
+            props.SetFloat(Multiplier, bandMultiplier);
             int b = (int) band;
             float ba = 1.0f * b;
-            props.SetFloat("_Band", ba);
+            props.SetFloat(Band1, ba);
             //Movement Stuff
-            // props.SetInt("_PanInvert", invertPan == true ? 1 : 0);
-            // props.SetInt("_TiltInvert", invertTilt == true ? 1 : 0);
-            props.SetInt("_EnableSpin", enableAutoSpin == true ? 1 : 0);
-            props.SetFloat("_SpinSpeed", spinSpeed);
+            // props.SetInt("_PanInvert", invertPan ? 1 : 0);
+            // props.SetInt("_TiltInvert", invertTilt ? 1 : 0);
+            props.SetInt(EnableSpin, enableAutoSpin ? 1 : 0);
+            props.SetFloat(Speed, spinSpeed);
             // props.SetFloat("_FixtureRotationX", tiltOffsetBlue);
             // props.SetFloat("_FixtureBaseRotationY", panOffsetBlueGreen);
             //Other Stuff
-            props.SetInt("_ProjectionSelection", selectGOBO);
-            props.SetColor("_Emission", lightColorTint);
-            props.SetFloat("_ConeWidth", coneWidth);
-            props.SetFloat("_GlobalIntensity", globalIntensity);
-            props.SetFloat("_FinalIntensity", finalIntensity);
-            props.SetFloat("_ConeLength", Mathf.Abs(coneLength - 10.0f));
-            props.SetFloat("_MaxConeLength", maxConeLength);
+            props.SetInt(ProjectionSelection, selectGOBO);
+            props.SetColor(Emission, lightColorTint);
+            props.SetInt(UseAnimatedEmission, lightColorTintAnimated?1:0);
+            props.SetFloat(Width, coneWidth);
+            props.SetFloat(Intensity, globalIntensity);
+            props.SetFloat(FinalIntensity1, finalIntensity);
+            props.SetFloat(Length, Mathf.Abs(coneLength - 10.0f));
+            props.SetFloat(MaxConeLength1, maxConeLength);
             // for(int i = 0; i < objRenderers.Length; i++)
             // {
             //     objRenderers[i].SetPropertyBlock(props);

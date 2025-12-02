@@ -26,6 +26,32 @@ namespace VRSL
     public class VRStageLighting_AudioLink_Laser : MonoBehaviour
 #endif
     {
+        // ReSharper disable InconsistentNaming
+        private readonly int Link = Shader.PropertyToID("_EnableAudioLink");
+        private readonly int EnableColorChord = Shader.PropertyToID("_EnableColorChord");
+        private readonly int Delay1 = Shader.PropertyToID("_Delay");
+        private readonly int Multiplier = Shader.PropertyToID("_BandMultiplier");
+        private readonly int Band1 = Shader.PropertyToID("_Band");
+        private readonly int TextureColorSampleX = Shader.PropertyToID("_TextureColorSampleX");
+        private readonly int TextureColorSampleY = Shader.PropertyToID("_TextureColorSampleY");
+        private readonly int EnableColorTextureSample = Shader.PropertyToID("_EnableColorTextureSample");
+        private readonly int UseTraditionalSampling = Shader.PropertyToID("_UseTraditionalSampling");
+        private readonly int EnableThemeColorSampling = Shader.PropertyToID("_EnableThemeColorSampling");
+        private readonly int ColorTarget = Shader.PropertyToID("_ThemeColorTarget");
+        private readonly int Emission = Shader.PropertyToID("_Emission");
+        private readonly int UseAnimatedEmission = Shader.PropertyToID("_UseAnimatedEmission");
+        private readonly int VertexConeWidth = Shader.PropertyToID("_VertexConeWidth");
+        private readonly int Intensity = Shader.PropertyToID("_GlobalIntensity");
+        private readonly int FinalIntensity1 = Shader.PropertyToID("_FinalIntensity");
+        private readonly int VertexConeLength = Shader.PropertyToID("_VertexConeLength");
+        private readonly int ZConeFlatness = Shader.PropertyToID("_ZConeFlatness");
+        private readonly int XRotation = Shader.PropertyToID("_XRotation");
+        private readonly int YRotation = Shader.PropertyToID("_YRotation");
+        private readonly int ZRotation = Shader.PropertyToID("_ZRotation");
+        private readonly int Count = Shader.PropertyToID("_LaserCount");
+        private readonly int Thickness = Shader.PropertyToID("_LaserThickness");
+        private readonly int Scroll = Shader.PropertyToID("_Scroll");
+        // ReSharper restore InconsistentNaming
 
         //////////////////Public Variables////////////////////
 
@@ -571,35 +597,35 @@ namespace VRSL
                 }
             }
             //AudioLink Stuff
-            props.SetFloat("_EnableAudioLink", enableAudioLink == true ? 1.0f : 0.0f);
-            props.SetInt("_EnableColorChord", enableColorChord == true ? 1 : 0);
+            props.SetFloat(Link, enableAudioLink ? 1.0f : 0.0f);
+            props.SetInt(EnableColorChord, enableColorChord ? 1 : 0);
             //props.SetFloat("_NumBands", spectrumBands.Length);
-            props.SetFloat("_Delay", delay);
-            props.SetFloat("_BandMultiplier", bandMultiplier);
+            props.SetFloat(Delay1, delay);
+            props.SetFloat(Multiplier, bandMultiplier);
             int b = (int) band;
             float ba = 1.0f * b;
-            props.SetFloat("_Band", ba);
+            props.SetFloat(Band1, ba);
             //Color Texture Sampling
-            props.SetFloat("_TextureColorSampleX", textureSamplingCoordinates.x);
-            props.SetFloat("_TextureColorSampleY", textureSamplingCoordinates.y);
-            props.SetInt("_EnableColorTextureSample", enableColorTextureSampling == true ? 1 : 0);
-            props.SetInt("_UseTraditionalSampling", traditionalColorTextureSampling == true ? 1 : 0);
-            props.SetInt("_EnableThemeColorSampling", enableThemeColorSampling == true ? 1 : 0);
-            props.SetInt("_ThemeColorTarget", themeColorTarget);
+            props.SetFloat(TextureColorSampleX, textureSamplingCoordinates.x);
+            props.SetFloat(TextureColorSampleY, textureSamplingCoordinates.y);
+            props.SetInt(EnableColorTextureSample, enableColorTextureSampling ? 1 : 0);
+            props.SetInt(UseTraditionalSampling, traditionalColorTextureSampling ? 1 : 0);
+            props.SetInt(EnableThemeColorSampling, enableThemeColorSampling ? 1 : 0);
+            props.SetInt(ColorTarget, themeColorTarget);
             //General Light Stuff
-            props.SetColor("_Emission", lightColorTint);
-            props.SetInt("_UseAnimatedEmission", lightColorTintAnimated?1:0);
-            props.SetFloat("_VertexConeWidth", coneWidth);
-            props.SetFloat("_GlobalIntensity", globalIntensity);
-            props.SetFloat("_FinalIntensity", finalIntensity);
-            props.SetFloat("_VertexConeLength", coneLength);
-            props.SetFloat("_ZConeFlatness", coneFlatness);
-            props.SetFloat("_XRotation", coneXRotation);
-            props.SetFloat("_YRotation", coneYRotation);
-            props.SetFloat("_ZRotation", coneZRotation);
-            props.SetInt("_LaserCount", laserCount);
-            props.SetFloat("_LaserThickness", laserThickness);
-            props.SetFloat("_Scroll", laserScroll);
+            props.SetColor(Emission, lightColorTint);
+            props.SetInt(UseAnimatedEmission, lightColorTintAnimated?1:0);
+            props.SetFloat(VertexConeWidth, coneWidth);
+            props.SetFloat(Intensity, globalIntensity);
+            props.SetFloat(FinalIntensity1, finalIntensity);
+            props.SetFloat(VertexConeLength, coneLength);
+            props.SetFloat(ZConeFlatness, coneFlatness);
+            props.SetFloat(XRotation, coneXRotation);
+            props.SetFloat(YRotation, coneYRotation);
+            props.SetFloat(ZRotation, coneZRotation);
+            props.SetInt(Count, laserCount);
+            props.SetFloat(Thickness, laserThickness);
+            props.SetFloat(Scroll, laserScroll);
             // for(int i = 0; i < objRenderers.Length; i++)
             // {
             //     objRenderers[i].SetPropertyBlock(props);
@@ -662,34 +688,35 @@ namespace VRSL
                 }
             }
             //AudioLink Stuff
-            props.SetFloat("_EnableAudioLink", 0.0f);
-            props.SetInt("_EnableColorChord", 0);
+            props.SetFloat(Link, 0.0f);
+            props.SetInt(EnableColorChord, 0);
             //props.SetFloat("_NumBands", spectrumBands.Length);
-            props.SetFloat("_Delay", delay);
-            props.SetFloat("_BandMultiplier", bandMultiplier);
+            props.SetFloat(Delay1, delay);
+            props.SetFloat(Multiplier, bandMultiplier);
             int b = (int) band;
             float ba = 1.0f * b;
-            props.SetFloat("_Band", ba);
+            props.SetFloat(Band1, ba);
             //Color Texture Sampling
-            props.SetFloat("_TextureColorSampleX", textureSamplingCoordinates.x);
-            props.SetFloat("_TextureColorSampleY", textureSamplingCoordinates.y);
-            props.SetInt("_EnableColorTextureSample", enableColorTextureSampling == true ? 1 : 0);
-            props.SetInt("_UseTraditionalSampling", traditionalColorTextureSampling == true ? 1 : 0);
-            props.SetInt("_EnableThemeColorSampling", enableThemeColorSampling == true ? 1 : 0);
-            props.SetInt("_ThemeColorTarget", themeColorTarget);
+            props.SetFloat(TextureColorSampleX, textureSamplingCoordinates.x);
+            props.SetFloat(TextureColorSampleY, textureSamplingCoordinates.y);
+            props.SetInt(EnableColorTextureSample, enableColorTextureSampling ? 1 : 0);
+            props.SetInt(UseTraditionalSampling, traditionalColorTextureSampling ? 1 : 0);
+            props.SetInt(EnableThemeColorSampling, enableThemeColorSampling ? 1 : 0);
+            props.SetInt(ColorTarget, themeColorTarget);
             //General Light Stuff
-            props.SetColor("_Emission", lightColorTint);
-            props.SetFloat("_VertexConeWidth", coneWidth);
-            props.SetFloat("_GlobalIntensity", globalIntensity);
-            props.SetFloat("_FinalIntensity", finalIntensity);
-            props.SetFloat("_VertexConeLength", coneLength);
-            props.SetFloat("_ZConeFlatness", coneFlatness);
-            props.SetFloat("_XRotation", coneXRotation);
-            props.SetFloat("_YRotation", coneYRotation);
-            props.SetFloat("_ZRotation", coneZRotation);
-            props.SetInt("_LaserCount", laserCount);
-            props.SetFloat("_LaserThickness", laserThickness);
-            props.SetFloat("_Scroll", laserScroll);
+            props.SetColor(Emission, lightColorTint);
+            props.SetInt(UseAnimatedEmission, lightColorTintAnimated?1:0);
+            props.SetFloat(VertexConeWidth, coneWidth);
+            props.SetFloat(Intensity, globalIntensity);
+            props.SetFloat(FinalIntensity1, finalIntensity);
+            props.SetFloat(VertexConeLength, coneLength);
+            props.SetFloat(ZConeFlatness, coneFlatness);
+            props.SetFloat(XRotation, coneXRotation);
+            props.SetFloat(YRotation, coneYRotation);
+            props.SetFloat(ZRotation, coneZRotation);
+            props.SetInt(Count, laserCount);
+            props.SetFloat(Thickness, laserThickness);
+            props.SetFloat(Scroll, laserScroll);
             // for(int i = 0; i < objRenderers.Length; i++)
             // {
             //     objRenderers[i].SetPropertyBlock(props);
