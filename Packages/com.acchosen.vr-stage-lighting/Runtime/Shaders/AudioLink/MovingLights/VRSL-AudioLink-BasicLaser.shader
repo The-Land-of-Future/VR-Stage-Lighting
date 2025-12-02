@@ -20,6 +20,8 @@
         _GlobalIntensityBlend("Global Intensity Blend", Range(0,1)) = 1
         [HideInInspector]_MainTex ("Texture", 2D) = "white" {}
         [HDR]_Emission ("Emission Color" , Color) = (1.0, 1.0, 1.0, 1.0)
+		[Toggle]_UseAnimatedEmission("Use Animated Light Color Tint", Int) = 0
+		[HDR]_Emission_Animated("Light Color Tint Animated", Color) = (1,1,1,1)
         _Multiplier("Emission Multiplier", Range(1,10)) = 1
         _VertexConeWidth ("Cone Width", Range(-3.75,20)) = 0
         _VertexConeLength("Cone Length", Range(-0.5,5)) = 0
@@ -129,6 +131,8 @@
                 UNITY_DEFINE_INSTANCED_PROP(float, _AltYRotation)
                 UNITY_DEFINE_INSTANCED_PROP(float, _LaserThickness)
                 UNITY_DEFINE_INSTANCED_PROP(float4, _Emission)
+                UNITY_DEFINE_INSTANCED_PROP(int, _UseAnimatedEmission)
+                UNITY_DEFINE_INSTANCED_PROP(float4, _Emission_Animated)
                 UNITY_DEFINE_INSTANCED_PROP(float, _ZConeFlatness)
                 UNITY_DEFINE_INSTANCED_PROP(float, _ZConeFlatnessAlt)
                 UNITY_DEFINE_INSTANCED_PROP(float, _VertexConeWidth)
@@ -318,7 +322,7 @@
 
             float4 getEmissionColor()
             {
-                float4 emissiveColor = UNITY_ACCESS_INSTANCED_PROP(Props, _Emission);
+                float4 emissiveColor = UNITY_ACCESS_INSTANCED_PROP(Props, _UseAnimatedEmission) == 1 ? UNITY_ACCESS_INSTANCED_PROP(Props, _Emission_Animated) : UNITY_ACCESS_INSTANCED_PROP(Props, _Emission);
                 float4 col = UNITY_ACCESS_INSTANCED_PROP(Props, _EnableColorTextureSample) > 0
                                ? ((emissiveColor.r + emissiveColor.g + emissiveColor.b) / 3.0) * GetTextureSampleColor()
                                : emissiveColor;

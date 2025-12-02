@@ -40,6 +40,8 @@
         _GlobalIntensityBlend("Global Intensity Blend", Range(0,1)) = 1
         _UniversalIntensity ("Universal Intensity", Range (0,1)) = 1
         [HDR]_Emission("Light Color Tint", Color) = (1,1,1,1)
+		[Toggle]_UseAnimatedEmission("Use Animated Light Color Tint", Int) = 0
+		[HDR]_Emission_Animated("Light Color Tint Animated", Color) = (1,1,1,1)
         _CurveMod ("Light Intensity Curve Modifier", Range (-3,8)) = 5.0
         _EmissionMask ("Emission Mask", 2D) = "white" {}
         _FixtureMaxIntensity ("Maximum Light Intensity",Range (0,15)) = 1

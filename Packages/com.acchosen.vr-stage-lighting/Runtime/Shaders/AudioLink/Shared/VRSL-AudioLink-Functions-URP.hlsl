@@ -129,7 +129,7 @@ float getStrobeFreq()
 #ifdef RAW
     float4 getEmissionColor()
     {
-        float4 emissiveColor = UNITY_ACCESS_INSTANCED_PROP(Props, _Emission);
+        float4 emissiveColor = UNITY_ACCESS_INSTANCED_PROP(Props, _UseAnimatedEmission) == 1 ? UNITY_ACCESS_INSTANCED_PROP(Props, _Emission_Animated) : UNITY_ACCESS_INSTANCED_PROP(Props, _Emission);
         return IF(UNITY_ACCESS_INSTANCED_PROP(Props, _EnableColorTextureSample) > 0,
                 ((emissiveColor.r + emissiveColor.g + emissiveColor.b)/3.0) * GetTextureSampleColor(),
                 emissiveColor);
@@ -223,7 +223,7 @@ float4 GetColorChordLight()
 
 float4 getEmissionColor()
 {
-    float4 emissiveColor = UNITY_ACCESS_INSTANCED_PROP(Props, _Emission);
+    float4 emissiveColor = UNITY_ACCESS_INSTANCED_PROP(Props, _UseAnimatedEmission) == 1 ? UNITY_ACCESS_INSTANCED_PROP(Props, _Emission_Animated) : UNITY_ACCESS_INSTANCED_PROP(Props, _Emission);
     float4 col = UNITY_ACCESS_INSTANCED_PROP(Props, _EnableColorTextureSample) > 0
                      ? ((emissiveColor.r + emissiveColor.g + emissiveColor.b) / 3.0) * GetTextureSampleColor()
                      : emissiveColor;

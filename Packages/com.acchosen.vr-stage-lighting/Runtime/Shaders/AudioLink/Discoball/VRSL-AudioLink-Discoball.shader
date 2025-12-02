@@ -12,6 +12,8 @@
          _GlobalIntensity("Global Intensity", Range(0,1)) = 1
          _FinalIntensity("Final Intensity", Range(0,1)) = 1
          [HDR]_Emission ("Color", Color) = (1.0, 1.0, 1.0, .2)
+		 [Toggle]_UseAnimatedEmission("Use Animated Light Color Tint", Int) = 0
+		 [HDR]_Emission_Animated("Light Color Tint Animated", Color) = (1,1,1,1)
          _Cube ("Projection Map", Cube) = "" {}
          [Toggle] _UseWorldNorm("Use World Normal vs View Normal", Float) = 0
          _RotationSpeed ("Rotation Speed", Range (0,180)) = 0

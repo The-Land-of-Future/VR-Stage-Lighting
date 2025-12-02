@@ -61,6 +61,8 @@ public class VRSLInspector : ShaderGUI
     MaterialProperty _FinalIntensity = null;
     MaterialProperty _UniversalIntensity = null;
     MaterialProperty _Emission = null;
+    MaterialProperty _UseAnimatedEmission = null;
+    MaterialProperty _Emission_Animated = null;
     MaterialProperty _CurveMod = null;
     MaterialProperty _ChannelMode = null;
 
@@ -554,6 +556,8 @@ public class VRSLInspector : ShaderGUI
                 matEditor.ShaderProperty(_UniversalIntensity, new GUIContent("Universal Intensity", "Sets the maximum brightness value of both Final and GLobal Intensity. Good for personalized settings of the max brightness of the shader by other users via UI. Is non-instanced."));
                 GUILayout.Space(10);
                 matEditor.ShaderProperty(_Emission, new GUIContent("Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
+                matEditor.ShaderProperty(_UseAnimatedEmission, new GUIContent("Use Animated Light Emission Color", "Used to switch between the \"Light Emission Color\" and the \"Animated Light Emission Color\""));
+                matEditor.ShaderProperty(_Emission_Animated, new GUIContent("Animated Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
                 ColorTextureSamplingGUI(matEditor, props, target);
 
                 //matEditor.ShaderProperty(_CurveMod, new GUIContent("Light Intensity Curve Modifier", "Curve modifier for light intensity."));
@@ -704,6 +708,8 @@ public class VRSLInspector : ShaderGUI
             matEditor.ShaderProperty(_UniversalIntensity, new GUIContent("Universal Intensity", "Sets the maximum brightness value of both Final and GLobal Intensity. Good for personalized settings of the max brightness of the shader by other users via UI. Is non-instanced."));
             GUILayout.Space(10);
             matEditor.ShaderProperty(_Emission, new GUIContent("Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
+            matEditor.ShaderProperty(_UseAnimatedEmission, new GUIContent("Use Animated Light Emission Color", "Used to switch between the \"Light Emission Color\" and the \"Animated Light Emission Color\""));
+            matEditor.ShaderProperty(_Emission_Animated, new GUIContent("Animated Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
             //ColorTextureSamplingGUI(matEditor, props, target);
 
             //matEditor.ShaderProperty(_CurveMod, new GUIContent("Light Intensity Curve Modifier", "Curve modifier for light intensity."));
@@ -801,6 +807,8 @@ public class VRSLInspector : ShaderGUI
             matEditor.ShaderProperty(_UniversalIntensity, new GUIContent("Universal Intensity", "Sets the maximum brightness value of both Final and GLobal Intensity. Good for personalized settings of the max brightness of the shader by other users via UI. Is non-instanced."));
             GUILayout.Space(10);
             matEditor.ShaderProperty(_Emission, new GUIContent("Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
+            matEditor.ShaderProperty(_UseAnimatedEmission, new GUIContent("Use Animated Light Emission Color", "Used to switch between the \"Light Emission Color\" and the \"Animated Light Emission Color\""));
+            matEditor.ShaderProperty(_Emission_Animated, new GUIContent("Animated Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
             ColorTextureSamplingGUI(matEditor, props, target);
 
             //matEditor.ShaderProperty(_CurveMod, new GUIContent("Light Intensity Curve Modifier", "Curve modifier for light intensity."));
@@ -945,6 +953,8 @@ public class VRSLInspector : ShaderGUI
                 matEditor.ShaderProperty(_FinalIntensity, new GUIContent("Final Intensity", "Sets the maximum brightness value of Global Intensity. Good for personalized settings of the max brightness of the shader by other users via UI."));
                 matEditor.ShaderProperty(_UniversalIntensity, new GUIContent("Universal Intensity", "Sets the maximum brightness value of both Final and GLobal Intensity. Good for personalized settings of the max brightness of the shader by other users via UI. Is non-instanced."));
                 matEditor.ShaderProperty(_Emission, new GUIContent("Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
+                matEditor.ShaderProperty(_UseAnimatedEmission, new GUIContent("Use Animated Light Emission Color", "Used to switch between the \"Light Emission Color\" and the \"Animated Light Emission Color\""));
+                matEditor.ShaderProperty(_Emission_Animated, new GUIContent("Animated Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
                 ColorTextureSamplingGUI(matEditor, props, target);
                 matEditor.ShaderProperty(_CurveMod, new GUIContent("Light Intensity Curve Modifier", "Curve modifier for light intensity."));
                 matEditor.ShaderProperty(_FixtureMaxIntensity, new GUIContent("Lens Max Brightness", "General slider for adjusting the max brightness of the lens"));
@@ -1026,6 +1036,8 @@ public class VRSLInspector : ShaderGUI
             matEditor.ShaderProperty(_FinalIntensity, new GUIContent("Final Intensity", "Sets the maximum brightness value of Global Intensity. Good for personalized settings of the max brightness of the shader by other users via UI."));
             matEditor.ShaderProperty(_UniversalIntensity, new GUIContent("Universal Intensity", "Sets the maximum brightness value of both Final and GLobal Intensity. Good for personalized settings of the max brightness of the shader by other users via UI. Is non-instanced."));
             matEditor.ShaderProperty(_Emission, new GUIContent("Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
+            matEditor.ShaderProperty(_UseAnimatedEmission, new GUIContent("Use Animated Light Emission Color", "Used to switch between the \"Light Emission Color\" and the \"Animated Light Emission Color\""));
+            matEditor.ShaderProperty(_Emission_Animated, new GUIContent("Animated Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
             ColorTextureSamplingGUI(matEditor, props, target);
             matEditor.ShaderProperty(_CurveMod, new GUIContent("Light Intensity Curve Modifier", "Curve modifier for light intensity."));
             matEditor.ShaderProperty(_FixtureMaxIntensity, new GUIContent("Lens Max Brightness", "General slider for adjusting the max brightness of the lens"));
@@ -1110,6 +1122,8 @@ public class VRSLInspector : ShaderGUI
             matEditor.ShaderProperty(_FixtureBaseRotationY, new GUIContent("Rotation Y Offset", "Offset the Y Rotation of the fixture."));
             matEditor.ShaderProperty(_FixtureRotationX, new GUIContent("Rotation X Offset", "Offset the X Rotation of the fixture."));
             matEditor.ShaderProperty(_Emission, new GUIContent("Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
+            matEditor.ShaderProperty(_UseAnimatedEmission, new GUIContent("Use Animated Light Emission Color", "Used to switch between the \"Light Emission Color\" and the \"Animated Light Emission Color\""));
+            matEditor.ShaderProperty(_Emission_Animated, new GUIContent("Animated Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
             ColorTextureSamplingGUI(matEditor, props, target);
             //matEditor.ShaderProperty(_, new GUIContent("Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
             //matEditor.ShaderProperty(_FixutreIntensityMultiplier, new GUIContent ("Intensity Multiplier", "Multiplier for the brightness. Good for adjusting to increase bloom"));
@@ -1293,6 +1307,8 @@ public class VRSLInspector : ShaderGUI
             matEditor.ShaderProperty(_FinalIntensity, new GUIContent("Final Intensity", "Sets the maximum brightness value of Global Intensity. Good for personalized settings of the max brightness of the shader by other users via UI."));
             matEditor.ShaderProperty(_UniversalIntensity, new GUIContent("Universal Intensity", "Sets the maximum brightness value of both Final and GLobal Intensity. Good for personalized settings of the max brightness of the shader by other users via UI. Is non-instanced."));
             matEditor.ShaderProperty(_Emission, new GUIContent("Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
+            matEditor.ShaderProperty(_UseAnimatedEmission, new GUIContent("Use Animated Light Emission Color", "Used to switch between the \"Light Emission Color\" and the \"Animated Light Emission Color\""));
+            matEditor.ShaderProperty(_Emission_Animated, new GUIContent("Animated Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
             matEditor.ShaderProperty(_FixtureBaseRotationY, new GUIContent("Rotation Y Offset", "Offset the Y Rotation of the fixture."));
             matEditor.ShaderProperty(_FixtureRotationX, new GUIContent("Rotation X Offset", "Offset the X Rotation of the fixture."));
             ColorTextureSamplingGUI(matEditor, props, target);
@@ -1619,6 +1635,8 @@ public class VRSLInspector : ShaderGUI
             matEditor.ShaderProperty(_FinalIntensity, new GUIContent("Final Intensity", "Sets the maximum brightness value of Global Intensity. Good for personalized settings of the max brightness of the shader by other users via UI."));
             matEditor.ShaderProperty(_UniversalIntensity, new GUIContent("Universal Intensity", "Sets the maximum brightness value of both Final and GLobal Intensity. Good for personalized settings of the max brightness of the shader by other users via UI. Is non-instanced."));
             matEditor.ShaderProperty(_Emission, new GUIContent("Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
+            matEditor.ShaderProperty(_UseAnimatedEmission, new GUIContent("Use Animated Light Emission Color", "Used to switch between the \"Light Emission Color\" and the \"Animated Light Emission Color\""));
+            matEditor.ShaderProperty(_Emission_Animated, new GUIContent("Animated Light Emission Color", "The color of the light!. Use this to color the emissive part of the material."));
             matEditor.ShaderProperty(_FixtureBaseRotationY, new GUIContent("Rotation Y Offset", "Offset the Y Rotation of the fixture."));
             matEditor.ShaderProperty(_FixtureRotationX, new GUIContent("Rotation X Offset", "Offset the X Rotation of the fixture."));
             ColorTextureSamplingGUI(matEditor, props, target);

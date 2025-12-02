@@ -38,6 +38,8 @@
 		_GlobalIntensityBlend("Global Intensity Blend", Range(0,1)) = 1
 		_UniversalIntensity ("Universal Intensity", Range (0,1)) = 1
 		[HDR]_Emission("Light Color Tint", Color) = (1,1,1,1)
+		[Toggle]_UseAnimatedEmission("Use Animated Light Color Tint", Int) = 0
+		[HDR]_Emission_Animated("Light Color Tint Animated", Color) = (1,1,1,1)
 		_Saturation("Final Saturation", Range(0,1)) = 1
 		_SaturationLength("Final Saturation Length", Range(1,20)) = 19
 		_LensMaxBrightness("Lens Max Brightness", Range(0.01, 10)) = 5

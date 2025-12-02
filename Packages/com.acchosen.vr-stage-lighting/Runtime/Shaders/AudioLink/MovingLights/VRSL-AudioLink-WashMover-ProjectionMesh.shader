@@ -31,6 +31,8 @@
 		_GlobalIntensityBlend("Global Intensity Blend", Range(0,1)) = 1
 		_UniversalIntensity ("Universal Intensity", Range (0,1)) = 1
 		[HDR]_Emission("Light Color Tint", Color) = (1,1,1,1)
+		[Toggle]_UseAnimatedEmission("Use Animated Light Color Tint", Int) = 0
+		[HDR]_Emission_Animated("Light Color Tint Animated", Color) = (1,1,1,1)
 		[HDR]_StaticEmission("Static Light Color Tint", Color) = (1,1,1,1)
 		[Toggle] _EnableStaticEmissionColor("Enable Static Emission Color", Int) = 0
 		_Saturation("Final Saturation", Range(0,1)) = 1
