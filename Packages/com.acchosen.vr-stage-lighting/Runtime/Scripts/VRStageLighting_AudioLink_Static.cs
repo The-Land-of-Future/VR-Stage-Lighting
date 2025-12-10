@@ -33,27 +33,27 @@ namespace VRSL
 #endif
     {
         // ReSharper disable InconsistentNaming
-        private readonly int TextureColorSampleX = Shader.PropertyToID("_TextureColorSampleX");
-        private readonly int TextureColorSampleY = Shader.PropertyToID("_TextureColorSampleY");
-        private readonly int EnableColorTextureSample = Shader.PropertyToID("_EnableColorTextureSample");
-        private readonly int UseTraditionalSampling = Shader.PropertyToID("_UseTraditionalSampling");
-        private readonly int EnableThemeColorSampling = Shader.PropertyToID("_EnableThemeColorSampling");
-        private readonly int ColorTarget = Shader.PropertyToID("_ThemeColorTarget");
-        private readonly int Link = Shader.PropertyToID("_EnableAudioLink");
-        private readonly int EnableColorChord = Shader.PropertyToID("_EnableColorChord");
-        private readonly int Delay1 = Shader.PropertyToID("_Delay");
-        private readonly int Multiplier = Shader.PropertyToID("_BandMultiplier");
-        private readonly int Band1 = Shader.PropertyToID("_Band");
-        private readonly int EnableSpin = Shader.PropertyToID("_EnableSpin");
-        private readonly int Speed = Shader.PropertyToID("_SpinSpeed");
-        private readonly int ProjectionSelection = Shader.PropertyToID("_ProjectionSelection");
-        private readonly int Emission = Shader.PropertyToID("_Emission");
-        private readonly int UseAnimatedEmission = Shader.PropertyToID("_UseAnimatedEmission");
-        private readonly int Width = Shader.PropertyToID("_ConeWidth");
-        private readonly int Intensity = Shader.PropertyToID("_GlobalIntensity");
-        private readonly int FinalIntensity1 = Shader.PropertyToID("_FinalIntensity");
-        private readonly int Length = Shader.PropertyToID("_ConeLength");
-        private readonly int MaxConeLength1 = Shader.PropertyToID("_MaxConeLength");
+        private int TextureColorSampleX;
+        private int TextureColorSampleY;
+        private int EnableColorTextureSample;
+        private int UseTraditionalSampling;
+        private int EnableThemeColorSampling;
+        private int ColorTarget;
+        private int Link;
+        private int EnableColorChord;
+        private int Delay1;
+        private int Multiplier;
+        private int Band1;
+        private int EnableSpin;
+        private int Speed;
+        private int ProjectionSelection;
+        private int Emission;
+        private int UseAnimatedEmission;
+        private int Width;
+        private int Intensity;
+        private int FinalIntensity1;
+        private int Length;
+        private int MaxConeLength1;
         // ReSharper restore InconsistentNaming
         //////////////////Public Variables////////////////////
 
@@ -292,6 +292,51 @@ namespace VRSL
 
         void Start()
         {
+#if UDONSHARP
+            TextureColorSampleX = VRCShader.PropertyToID("_TextureColorSampleX");
+            TextureColorSampleY = VRCShader.PropertyToID("_TextureColorSampleY");
+            EnableColorTextureSample = VRCShader.PropertyToID("_EnableColorTextureSample");
+            UseTraditionalSampling = VRCShader.PropertyToID("_UseTraditionalSampling");
+            EnableThemeColorSampling = VRCShader.PropertyToID("_EnableThemeColorSampling");
+            ColorTarget = VRCShader.PropertyToID("_ThemeColorTarget");
+            Link = VRCShader.PropertyToID("_EnableAudioLink");
+            EnableColorChord = VRCShader.PropertyToID("_EnableColorChord");
+            Delay1 = VRCShader.PropertyToID("_Delay");
+            Multiplier = VRCShader.PropertyToID("_BandMultiplier");
+            Band1 = VRCShader.PropertyToID("_Band");
+            EnableSpin = VRCShader.PropertyToID("_EnableSpin");
+            Speed = VRCShader.PropertyToID("_SpinSpeed");
+            ProjectionSelection = VRCShader.PropertyToID("_ProjectionSelection");
+            Emission = VRCShader.PropertyToID("_Emission");
+            UseAnimatedEmission = VRCShader.PropertyToID("_UseAnimatedEmission");
+            Width = VRCShader.PropertyToID("_ConeWidth");
+            Intensity = VRCShader.PropertyToID("_GlobalIntensity");
+            FinalIntensity1 = VRCShader.PropertyToID("_FinalIntensity");
+            Length = VRCShader.PropertyToID("_ConeLength");
+            MaxConeLength1 = VRCShader.PropertyToID("_MaxConeLength");
+#else
+            TextureColorSampleX = Shader.PropertyToID("_TextureColorSampleX");
+            TextureColorSampleY = Shader.PropertyToID("_TextureColorSampleY");
+            EnableColorTextureSample = Shader.PropertyToID("_EnableColorTextureSample");
+            UseTraditionalSampling = Shader.PropertyToID("_UseTraditionalSampling");
+            EnableThemeColorSampling = Shader.PropertyToID("_EnableThemeColorSampling");
+            ColorTarget = Shader.PropertyToID("_ThemeColorTarget");
+            Link = Shader.PropertyToID("_EnableAudioLink");
+            EnableColorChord = Shader.PropertyToID("_EnableColorChord");
+            Delay1 = Shader.PropertyToID("_Delay");
+            Multiplier = Shader.PropertyToID("_BandMultiplier");
+            Band1 = Shader.PropertyToID("_Band");
+            EnableSpin = Shader.PropertyToID("_EnableSpin");
+            Speed = Shader.PropertyToID("_SpinSpeed");
+            ProjectionSelection = Shader.PropertyToID("_ProjectionSelection");
+            Emission = Shader.PropertyToID("_Emission");
+            UseAnimatedEmission = Shader.PropertyToID("_UseAnimatedEmission");
+            Width = Shader.PropertyToID("_ConeWidth");
+            Intensity = Shader.PropertyToID("_GlobalIntensity");
+            FinalIntensity1 = Shader.PropertyToID("_FinalIntensity");
+            Length = Shader.PropertyToID("_ConeLength");
+            MaxConeLength1 = Shader.PropertyToID("_MaxConeLength");
+#endif
             Init(true);
         }
 
