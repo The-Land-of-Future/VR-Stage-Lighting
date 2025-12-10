@@ -322,7 +322,7 @@
 
             float4 getEmissionColor()
             {
-                float4 emissiveColor = UNITY_ACCESS_INSTANCED_PROP(Props, _UseAnimatedEmission) == 1 ? UNITY_ACCESS_INSTANCED_PROP(Props, _Emission_Animated) : UNITY_ACCESS_INSTANCED_PROP(Props, _Emission);
+                float4 emissiveColor = UNITY_ACCESS_INSTANCED_PROP(Props, _UseAnimatedEmission) > 0 ? UNITY_ACCESS_INSTANCED_PROP(Props, _Emission_Animated) : UNITY_ACCESS_INSTANCED_PROP(Props, _Emission);
                 float4 col = UNITY_ACCESS_INSTANCED_PROP(Props, _EnableColorTextureSample) > 0
                                ? ((emissiveColor.r + emissiveColor.g + emissiveColor.b) / 3.0) * GetTextureSampleColor()
                                : emissiveColor;
@@ -587,6 +587,8 @@
                 UNITY_DEFINE_INSTANCED_PROP(float, _AltYRotation)
                 UNITY_DEFINE_INSTANCED_PROP(float, _LaserThickness)
                 UNITY_DEFINE_INSTANCED_PROP(float4, _Emission)
+                UNITY_DEFINE_INSTANCED_PROP(int, _UseAnimatedEmission)
+                UNITY_DEFINE_INSTANCED_PROP(float4, _Emission_Animated)
                 UNITY_DEFINE_INSTANCED_PROP(float, _ZConeFlatness)
                 UNITY_DEFINE_INSTANCED_PROP(float, _ZConeFlatnessAlt)
                 UNITY_DEFINE_INSTANCED_PROP(float, _VertexConeWidth)
@@ -758,7 +760,7 @@
 
             float4 getEmissionColor()
             {
-                float4 emissiveColor = UNITY_ACCESS_INSTANCED_PROP(Props,_Emission);
+                float4 emissiveColor = UNITY_ACCESS_INSTANCED_PROP(Props, _UseAnimatedEmission) > 0 ? UNITY_ACCESS_INSTANCED_PROP(Props, _Emission_Animated) : UNITY_ACCESS_INSTANCED_PROP(Props, _Emission);
                 float4 col =  UNITY_ACCESS_INSTANCED_PROP(Props,_EnableColorTextureSample) > 0 ? ((emissiveColor.r + emissiveColor.g + emissiveColor.b)/3.0) * GetTextureSampleColor() : emissiveColor;
                 col =  UNITY_ACCESS_INSTANCED_PROP(Props,_EnableThemeColorSampling) > 0 ? ((emissiveColor.r + emissiveColor.g + emissiveColor.b)/3.0) * GetThemeSampleColor() : col;
                 return  checkIfColorChord() == 1 ? GetColorChordLight() : col;

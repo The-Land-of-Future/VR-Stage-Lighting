@@ -186,7 +186,11 @@ half getStrobeFreq()
 #endif
 half4 getEmissionColor()
 {
+    #ifdef VRSL_AUDIOLINK
+    return UNITY_ACCESS_INSTANCED_PROP(Props, _UseAnimatedEmission) > 0 ? UNITY_ACCESS_INSTANCED_PROP(Props, _Emission_Animated) : UNITY_ACCESS_INSTANCED_PROP(Props, _Emission);
+    #else
     return UNITY_ACCESS_INSTANCED_PROP(Props,_Emission);
+    #endif
 }
 #ifndef LASER
 half getConeWidth()
