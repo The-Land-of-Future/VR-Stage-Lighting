@@ -6,6 +6,11 @@ using UdonSharp;
 using VRC.SDKBase;
 using VRC.Udon;
 #endif
+#if UDONSHARP
+using PropertyToIdClass = VRC.SDKBase.VRCShader;
+#else
+using PropertyToIdClass = UnityEngine.Shader;
+#endif
 
 #if UNITY_EDITOR && !COMPILER_UDONSHARP
 using UnityEditor;
@@ -26,6 +31,29 @@ namespace VRSL
     public class VRStageLighting_DMX_Static : MonoBehaviour
 #endif
     {
+        // ReSharper disable InconsistentNaming
+        private int DmxChannel = PropertyToIdClass.PropertyToID("_DMXChannel");
+        private int UniverseMode = PropertyToIdClass.PropertyToID("_NineUniverseMode");
+        private int PanInvert = PropertyToIdClass.PropertyToID("_PanInvert");
+        private int LegacyGoboRange = PropertyToIdClass.PropertyToID("_LegacyGoboRange");
+        private int TiltInvert = PropertyToIdClass.PropertyToID("_TiltInvert");
+        private int EnableStrobe = PropertyToIdClass.PropertyToID("_EnableStrobe");
+        private int EnableSpin = PropertyToIdClass.PropertyToID("_EnableSpin");
+        private int EnableDmx = PropertyToIdClass.PropertyToID("_EnableDMX");
+        private int ProjectionSelection = PropertyToIdClass.PropertyToID("_ProjectionSelection");
+        private int FixtureRotationX = PropertyToIdClass.PropertyToID("_FixtureRotationX");
+        private int FixtureBaseRotationY = PropertyToIdClass.PropertyToID("_FixtureBaseRotationY");
+        private int Emission = PropertyToIdClass.PropertyToID("_Emission");
+        private int EmissionDmx = PropertyToIdClass.PropertyToID("_EmissionDMX");
+        private int Width = PropertyToIdClass.PropertyToID("_ConeWidth");
+        private int Intensity = PropertyToIdClass.PropertyToID("_GlobalIntensity");
+        private int FinalIntensity1 = PropertyToIdClass.PropertyToID("_FinalIntensity");
+        private int Length = PropertyToIdClass.PropertyToID("_ConeLength");
+        private int MaxConeLength1 = PropertyToIdClass.PropertyToID("_MaxConeLength");
+        private int MaxMinPanAngle = PropertyToIdClass.PropertyToID("_MaxMinPanAngle");
+        private int MaxMinTiltAngle = PropertyToIdClass.PropertyToID("_MaxMinTiltAngle");
+        // ReSharper restore InconsistentNaming
+
         //////////////////Public Variables////////////////////
         [Header("DMX Settings")]
         [Tooltip ("Enables DMX mode for this fixture.")]
@@ -260,13 +288,13 @@ namespace VRSL
         MaterialPropertyBlock _SetFinalIntensityComponents(MaterialPropertyBlock props, MeshRenderer renderer){
             if(!finalIntensityComponentMode){return props;}
                 if(renderer.gameObject.name.Contains("Volume") || renderer.gameObject.name.Contains("volume") || renderer.gameObject.name.Contains("Flare") || renderer.gameObject.name.Contains("flare")){
-                    props.SetFloat("_FinalIntensity", finalIntensityVolumetric);
+                    props.SetFloat(FinalIntensity1, finalIntensityVolumetric);
                 }
                 else if(renderer.gameObject.name.Contains("Project") || renderer.gameObject.name.Contains("project")){
-                    props.SetFloat("_FinalIntensity", finalIntensityProjection);
+                    props.SetFloat(FinalIntensity1, finalIntensityProjection);
                 }
                 else{
-                    props.SetFloat("_FinalIntensity", finalIntensityFixture);
+                    props.SetFloat(FinalIntensity1, finalIntensityFixture);
                 }
             return props;
         }
@@ -289,39 +317,39 @@ namespace VRSL
                 if(singleChannelMode)
                 {
                     // calculatedDMXChannel = Mathf.Abs(Mathf.FloorToInt((int) sector * 13) + 1) + Mathf.Abs(Channel);
-                    props.SetInt("_DMXChannel", SectorConversion() + Mathf.Abs(Channel));
+                    props.SetInt(DmxChannel, SectorConversion() + Mathf.Abs(Channel));
                 }
                 else
                 {
-                    props.SetInt("_DMXChannel", SectorConversion());
+                    props.SetInt(DmxChannel, SectorConversion());
                 }
                 // calculatedDMXUniverse = Mathf.FloorToInt(calculatedDMXChannel / 512) + 1;
                 // calculatedDMXChannel = calculatedDMXChannel - ((calculatedDMXUniverse - 1) * 512);
             }
             else
             {
-                props.SetInt("_DMXChannel", RawDMXConversion());
+                props.SetInt(DmxChannel, RawDMXConversion());
             }
 
-            props.SetInt("_NineUniverseMode", nineUniverseMode == true ? 1 : 0);
-            props.SetInt("_PanInvert", invertPan == true ? 1 : 0);
-            props.SetInt("_LegacyGoboRange", legacyGoboRange == true ? 1 : 0);
-            props.SetInt("_TiltInvert", invertTilt == true ? 1 : 0);
-            props.SetInt("_EnableStrobe", enableStrobe == true ? 1 : 0);
-            props.SetInt("_EnableSpin", enableAutoSpin == true ? 1 : 0);
-            props.SetInt("_EnableDMX", enableDMXChannels == true ? 1 : 0);
-            props.SetInt("_ProjectionSelection", selectGOBO);
-            props.SetFloat("_FixtureRotationX", tiltOffsetBlue);
-            props.SetFloat("_FixtureBaseRotationY", panOffsetBlueGreen);
-            props.SetColor("_Emission", lightColorTint);
-            props.SetColor("_EmissionDMX", lightColorTint);
-            props.SetFloat("_ConeWidth", coneWidth);
-            props.SetFloat("_GlobalIntensity", globalIntensity);
-            props.SetFloat("_FinalIntensity", finalIntensity);
-            props.SetFloat("_ConeLength", Mathf.Abs(coneLength - 10.5f));
-            props.SetFloat("_MaxConeLength", maxConeLength);
-            props.SetFloat("_MaxMinPanAngle", (maxMinPan/2.0f));
-            props.SetFloat("_MaxMinTiltAngle", (maxMinTilt/2.0f));
+            props.SetInt(UniverseMode, nineUniverseMode == true ? 1 : 0);
+            props.SetInt(PanInvert, invertPan == true ? 1 : 0);
+            props.SetInt(LegacyGoboRange, legacyGoboRange == true ? 1 : 0);
+            props.SetInt(TiltInvert, invertTilt == true ? 1 : 0);
+            props.SetInt(EnableStrobe, enableStrobe == true ? 1 : 0);
+            props.SetInt(EnableSpin, enableAutoSpin == true ? 1 : 0);
+            props.SetInt(EnableDmx, enableDMXChannels == true ? 1 : 0);
+            props.SetInt(ProjectionSelection, selectGOBO);
+            props.SetFloat(FixtureRotationX, tiltOffsetBlue);
+            props.SetFloat(FixtureBaseRotationY, panOffsetBlueGreen);
+            props.SetColor(Emission, lightColorTint);
+            props.SetColor(EmissionDmx, lightColorTint);
+            props.SetFloat(Width, coneWidth);
+            props.SetFloat(Intensity, globalIntensity);
+            props.SetFloat(FinalIntensity1, finalIntensity);
+            props.SetFloat(Length, Mathf.Abs(coneLength - 10.5f));
+            props.SetFloat(MaxConeLength1, maxConeLength);
+            props.SetFloat(MaxMinPanAngle, (maxMinPan/2.0f));
+            props.SetFloat(MaxMinTiltAngle, (maxMinTilt/2.0f));
             switch(objRenderers.Length)
             {
                 case 0:
@@ -390,38 +418,38 @@ namespace VRSL
                 if(singleChannelMode)
                 {
                     // calculatedDMXChannel = Mathf.Abs(Mathf.FloorToInt((int) sector * 13) + 1) + Mathf.Abs(Channel);
-                    props.SetInt("_DMXChannel", SectorConversion() + Mathf.Abs(Channel));
+                    props.SetInt(DmxChannel, SectorConversion() + Mathf.Abs(Channel));
                 }
                 else
                 {
-                    props.SetInt("_DMXChannel", SectorConversion());
+                    props.SetInt(DmxChannel, SectorConversion());
                 }
                 // calculatedDMXUniverse = Mathf.FloorToInt(calculatedDMXChannel / 512) + 1;
                 // calculatedDMXChannel = calculatedDMXChannel - ((calculatedDMXUniverse - 1) * 512);
             }
             else
             {
-                props.SetInt("_DMXChannel", RawDMXConversion());
+                props.SetInt(DmxChannel, RawDMXConversion());
             }
-            props.SetInt("_NineUniverseMode", nineUniverseMode == true ? 1 : 0);
-            props.SetInt("_PanInvert", invertPan == true ? 1 : 0);
-            props.SetInt("_TiltInvert", invertTilt == true ? 1 : 0);
-            props.SetInt("_LegacyGoboRange", legacyGoboRange == true ? 1 : 0);
-            props.SetInt("_EnableStrobe", 0);
-            props.SetInt("_EnableSpin", enableAutoSpin == true ? 1 : 0);
-            props.SetInt("_EnableDMX", 0);
-            props.SetInt("_ProjectionSelection", selectGOBO);
-            props.SetFloat("_FixtureRotationX", tiltOffsetBlue);
-            props.SetFloat("_FixtureBaseRotationY", panOffsetBlueGreen);
-            props.SetColor("_Emission", lightColorTint);
-            props.SetColor("_EmissionDMX", lightColorTint);
-            props.SetFloat("_ConeWidth", coneWidth);
-            props.SetFloat("_GlobalIntensity", globalIntensity);
-            props.SetFloat("_FinalIntensity", finalIntensity);
-            props.SetFloat("_ConeLength", Mathf.Abs(coneLength - 10.5f));
-            props.SetFloat("_MaxConeLength", maxConeLength);
-            props.SetFloat("_MaxMinPanAngle", (maxMinPan/2.0f));
-            props.SetFloat("_MaxMinTiltAngle", (maxMinTilt/2.0f));
+            props.SetInt(UniverseMode, nineUniverseMode == true ? 1 : 0);
+            props.SetInt(PanInvert, invertPan == true ? 1 : 0);
+            props.SetInt(TiltInvert, invertTilt == true ? 1 : 0);
+            props.SetInt(LegacyGoboRange, legacyGoboRange == true ? 1 : 0);
+            props.SetInt(EnableStrobe, 0);
+            props.SetInt(EnableSpin, enableAutoSpin == true ? 1 : 0);
+            props.SetInt(EnableDmx, 0);
+            props.SetInt(ProjectionSelection, selectGOBO);
+            props.SetFloat(FixtureRotationX, tiltOffsetBlue);
+            props.SetFloat(FixtureBaseRotationY, panOffsetBlueGreen);
+            props.SetColor(Emission, lightColorTint);
+            props.SetColor(EmissionDmx, lightColorTint);
+            props.SetFloat(Width, coneWidth);
+            props.SetFloat(Intensity, globalIntensity);
+            props.SetFloat(FinalIntensity1, finalIntensity);
+            props.SetFloat(Length, Mathf.Abs(coneLength - 10.5f));
+            props.SetFloat(MaxConeLength1, maxConeLength);
+            props.SetFloat(MaxMinPanAngle, (maxMinPan/2.0f));
+            props.SetFloat(MaxMinTiltAngle, (maxMinTilt/2.0f));
             switch(objRenderers.Length)
             {
                 case 0:

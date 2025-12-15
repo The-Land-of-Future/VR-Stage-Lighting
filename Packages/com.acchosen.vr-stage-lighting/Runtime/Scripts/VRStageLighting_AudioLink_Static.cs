@@ -4,6 +4,11 @@ using UdonSharp;
 using VRC.SDKBase;
 using VRC.Udon;
 #endif
+#if UDONSHARP
+using PropertyToIdClass = VRC.SDKBase.VRCShader;
+#else
+using PropertyToIdClass = UnityEngine.Shader;
+#endif
 #if !COMPILER_UDONSHARP && UNITY_EDITOR
 using UnityEditor;
 #if UDONSHARP
@@ -33,27 +38,27 @@ namespace VRSL
 #endif
     {
         // ReSharper disable InconsistentNaming
-        private int TextureColorSampleX;
-        private int TextureColorSampleY;
-        private int EnableColorTextureSample;
-        private int UseTraditionalSampling;
-        private int EnableThemeColorSampling;
-        private int ColorTarget;
-        private int Link;
-        private int EnableColorChord;
-        private int Delay1;
-        private int Multiplier;
-        private int Band1;
-        private int EnableSpin;
-        private int Speed;
-        private int ProjectionSelection;
-        private int Emission;
-        private int UseAnimatedEmission;
-        private int Width;
-        private int Intensity;
-        private int FinalIntensity1;
-        private int Length;
-        private int MaxConeLength1;
+        private int TextureColorSampleX = PropertyToIdClass.PropertyToID("_TextureColorSampleX") ;
+        private int TextureColorSampleY = PropertyToIdClass.PropertyToID("_TextureColorSampleY") ;
+        private int EnableColorTextureSample = PropertyToIdClass.PropertyToID("_EnableColorTextureSample");
+        private int UseTraditionalSampling = PropertyToIdClass.PropertyToID("_UseTraditionalSampling");
+        private int EnableThemeColorSampling = PropertyToIdClass.PropertyToID("_EnableThemeColorSampling");
+        private int ColorTarget = PropertyToIdClass.PropertyToID("_ThemeColorTarget");
+        private int Link = PropertyToIdClass.PropertyToID("_EnableAudioLink");
+        private int EnableColorChord = PropertyToIdClass.PropertyToID("_EnableColorChord");
+        private int Delay1 = PropertyToIdClass.PropertyToID("_Delay");
+        private int Multiplier = PropertyToIdClass.PropertyToID("_BandMultiplier");
+        private int Band1 = PropertyToIdClass.PropertyToID("_Band");
+        private int EnableSpin = PropertyToIdClass.PropertyToID("_EnableSpin");
+        private int Speed = PropertyToIdClass.PropertyToID("_SpinSpeed");
+        private int ProjectionSelection = PropertyToIdClass.PropertyToID("_ProjectionSelection");
+        private int Emission = PropertyToIdClass.PropertyToID("_Emission");
+        private int UseAnimatedEmission = PropertyToIdClass.PropertyToID("_UseAnimatedEmission");
+        private int Width = PropertyToIdClass.PropertyToID("_ConeWidth");
+        private int Intensity = PropertyToIdClass.PropertyToID("_GlobalIntensity");
+        private int FinalIntensity1 = PropertyToIdClass.PropertyToID("_FinalIntensity");
+        private int Length = PropertyToIdClass.PropertyToID("_ConeLength");
+        private int MaxConeLength1 = PropertyToIdClass.PropertyToID("_MaxConeLength");
         // ReSharper restore InconsistentNaming
         //////////////////Public Variables////////////////////
 
@@ -292,51 +297,6 @@ namespace VRSL
 
         void Start()
         {
-#if UDONSHARP
-            TextureColorSampleX = VRCShader.PropertyToID("_TextureColorSampleX");
-            TextureColorSampleY = VRCShader.PropertyToID("_TextureColorSampleY");
-            EnableColorTextureSample = VRCShader.PropertyToID("_EnableColorTextureSample");
-            UseTraditionalSampling = VRCShader.PropertyToID("_UseTraditionalSampling");
-            EnableThemeColorSampling = VRCShader.PropertyToID("_EnableThemeColorSampling");
-            ColorTarget = VRCShader.PropertyToID("_ThemeColorTarget");
-            Link = VRCShader.PropertyToID("_EnableAudioLink");
-            EnableColorChord = VRCShader.PropertyToID("_EnableColorChord");
-            Delay1 = VRCShader.PropertyToID("_Delay");
-            Multiplier = VRCShader.PropertyToID("_BandMultiplier");
-            Band1 = VRCShader.PropertyToID("_Band");
-            EnableSpin = VRCShader.PropertyToID("_EnableSpin");
-            Speed = VRCShader.PropertyToID("_SpinSpeed");
-            ProjectionSelection = VRCShader.PropertyToID("_ProjectionSelection");
-            Emission = VRCShader.PropertyToID("_Emission");
-            UseAnimatedEmission = VRCShader.PropertyToID("_UseAnimatedEmission");
-            Width = VRCShader.PropertyToID("_ConeWidth");
-            Intensity = VRCShader.PropertyToID("_GlobalIntensity");
-            FinalIntensity1 = VRCShader.PropertyToID("_FinalIntensity");
-            Length = VRCShader.PropertyToID("_ConeLength");
-            MaxConeLength1 = VRCShader.PropertyToID("_MaxConeLength");
-#else
-            TextureColorSampleX = Shader.PropertyToID("_TextureColorSampleX");
-            TextureColorSampleY = Shader.PropertyToID("_TextureColorSampleY");
-            EnableColorTextureSample = Shader.PropertyToID("_EnableColorTextureSample");
-            UseTraditionalSampling = Shader.PropertyToID("_UseTraditionalSampling");
-            EnableThemeColorSampling = Shader.PropertyToID("_EnableThemeColorSampling");
-            ColorTarget = Shader.PropertyToID("_ThemeColorTarget");
-            Link = Shader.PropertyToID("_EnableAudioLink");
-            EnableColorChord = Shader.PropertyToID("_EnableColorChord");
-            Delay1 = Shader.PropertyToID("_Delay");
-            Multiplier = Shader.PropertyToID("_BandMultiplier");
-            Band1 = Shader.PropertyToID("_Band");
-            EnableSpin = Shader.PropertyToID("_EnableSpin");
-            Speed = Shader.PropertyToID("_SpinSpeed");
-            ProjectionSelection = Shader.PropertyToID("_ProjectionSelection");
-            Emission = Shader.PropertyToID("_Emission");
-            UseAnimatedEmission = Shader.PropertyToID("_UseAnimatedEmission");
-            Width = Shader.PropertyToID("_ConeWidth");
-            Intensity = Shader.PropertyToID("_GlobalIntensity");
-            FinalIntensity1 = Shader.PropertyToID("_FinalIntensity");
-            Length = Shader.PropertyToID("_ConeLength");
-            MaxConeLength1 = Shader.PropertyToID("_MaxConeLength");
-#endif
             Init(true);
         }
 
