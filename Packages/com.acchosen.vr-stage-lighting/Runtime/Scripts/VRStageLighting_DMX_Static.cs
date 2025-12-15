@@ -174,6 +174,26 @@ namespace VRSL
 
         void Start()
         {
+            DmxChannel = PropertyToIdClass.PropertyToID("_DMXChannel");
+            UniverseMode = PropertyToIdClass.PropertyToID("_NineUniverseMode");
+            PanInvert = PropertyToIdClass.PropertyToID("_PanInvert");
+            LegacyGoboRange = PropertyToIdClass.PropertyToID("_LegacyGoboRange");
+            TiltInvert = PropertyToIdClass.PropertyToID("_TiltInvert");
+            EnableStrobe = PropertyToIdClass.PropertyToID("_EnableStrobe");
+            EnableSpin = PropertyToIdClass.PropertyToID("_EnableSpin");
+            EnableDmx = PropertyToIdClass.PropertyToID("_EnableDMX");
+            ProjectionSelection = PropertyToIdClass.PropertyToID("_ProjectionSelection");
+            FixtureRotationX = PropertyToIdClass.PropertyToID("_FixtureRotationX");
+            FixtureBaseRotationY = PropertyToIdClass.PropertyToID("_FixtureBaseRotationY");
+            Emission = PropertyToIdClass.PropertyToID("_Emission");
+            EmissionDmx = PropertyToIdClass.PropertyToID("_EmissionDMX");
+            Width = PropertyToIdClass.PropertyToID("_ConeWidth");
+            Intensity = PropertyToIdClass.PropertyToID("_GlobalIntensity");
+            FinalIntensity1 = PropertyToIdClass.PropertyToID("_FinalIntensity");
+            Length = PropertyToIdClass.PropertyToID("_ConeLength");
+            MaxConeLength1 = PropertyToIdClass.PropertyToID("_MaxConeLength");
+            MaxMinPanAngle = PropertyToIdClass.PropertyToID("_MaxMinPanAngle");
+            MaxMinTiltAngle = PropertyToIdClass.PropertyToID("_MaxMinTiltAngle");
             Init(true);
         }
 

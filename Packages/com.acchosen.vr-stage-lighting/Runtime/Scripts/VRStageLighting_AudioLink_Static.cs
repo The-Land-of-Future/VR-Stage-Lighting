@@ -297,6 +297,27 @@ namespace VRSL
 
         void Start()
         {
+            TextureColorSampleX = PropertyToIdClass.PropertyToID("_TextureColorSampleX") ;
+            TextureColorSampleY = PropertyToIdClass.PropertyToID("_TextureColorSampleY") ;
+            EnableColorTextureSample = PropertyToIdClass.PropertyToID("_EnableColorTextureSample");
+            UseTraditionalSampling = PropertyToIdClass.PropertyToID("_UseTraditionalSampling");
+            EnableThemeColorSampling = PropertyToIdClass.PropertyToID("_EnableThemeColorSampling");
+            ColorTarget = PropertyToIdClass.PropertyToID("_ThemeColorTarget");
+            Link = PropertyToIdClass.PropertyToID("_EnableAudioLink");
+            EnableColorChord = PropertyToIdClass.PropertyToID("_EnableColorChord");
+            Delay1 = PropertyToIdClass.PropertyToID("_Delay");
+            Multiplier = PropertyToIdClass.PropertyToID("_BandMultiplier");
+            Band1 = PropertyToIdClass.PropertyToID("_Band");
+            EnableSpin = PropertyToIdClass.PropertyToID("_EnableSpin");
+            Speed = PropertyToIdClass.PropertyToID("_SpinSpeed");
+            ProjectionSelection = PropertyToIdClass.PropertyToID("_ProjectionSelection");
+            Emission = PropertyToIdClass.PropertyToID("_Emission");
+            UseAnimatedEmission = PropertyToIdClass.PropertyToID("_UseAnimatedEmission");
+            Width = PropertyToIdClass.PropertyToID("_ConeWidth");
+            Intensity = PropertyToIdClass.PropertyToID("_GlobalIntensity");
+            FinalIntensity1 = PropertyToIdClass.PropertyToID("_FinalIntensity");
+            Length = PropertyToIdClass.PropertyToID("_ConeLength");
+            MaxConeLength1 = PropertyToIdClass.PropertyToID("_MaxConeLength");
             Init(true);
         }
 

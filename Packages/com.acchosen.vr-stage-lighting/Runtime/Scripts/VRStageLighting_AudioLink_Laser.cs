@@ -581,6 +581,30 @@ namespace VRSL
 
         void Start()
         {
+            Link = PropertyToIdClass.PropertyToID("_EnableAudioLink");
+            EnableColorChord = PropertyToIdClass.PropertyToID("_EnableColorChord");
+            Delay1 = PropertyToIdClass.PropertyToID("_Delay");
+            Multiplier = PropertyToIdClass.PropertyToID("_BandMultiplier");
+            Band1 = PropertyToIdClass.PropertyToID("_Band");
+            TextureColorSampleX = PropertyToIdClass.PropertyToID("_TextureColorSampleX");
+            TextureColorSampleY = PropertyToIdClass.PropertyToID("_TextureColorSampleY");
+            EnableColorTextureSample = PropertyToIdClass.PropertyToID("_EnableColorTextureSample");
+            UseTraditionalSampling = PropertyToIdClass.PropertyToID("_UseTraditionalSampling");
+            EnableThemeColorSampling = PropertyToIdClass.PropertyToID("_EnableThemeColorSampling");
+            ColorTarget = PropertyToIdClass.PropertyToID("_ThemeColorTarget");
+            Emission = PropertyToIdClass.PropertyToID("_Emission");
+            UseAnimatedEmission = PropertyToIdClass.PropertyToID("_UseAnimatedEmission");
+            VertexConeWidth = PropertyToIdClass.PropertyToID("_VertexConeWidth");
+            Intensity = PropertyToIdClass.PropertyToID("_GlobalIntensity");
+            FinalIntensity1 = PropertyToIdClass.PropertyToID("_FinalIntensity");
+            VertexConeLength = PropertyToIdClass.PropertyToID("_VertexConeLength");
+            ZConeFlatness = PropertyToIdClass.PropertyToID("_ZConeFlatness");
+            XRotation = PropertyToIdClass.PropertyToID("_XRotation");
+            YRotation = PropertyToIdClass.PropertyToID("_YRotation");
+            ZRotation = PropertyToIdClass.PropertyToID("_ZRotation");
+            Count = PropertyToIdClass.PropertyToID("_LaserCount");
+            Thickness = PropertyToIdClass.PropertyToID("_LaserThickness");
+            Scroll = PropertyToIdClass.PropertyToID("_Scroll");
             Init(true);
         }
 
