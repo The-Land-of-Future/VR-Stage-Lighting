@@ -218,18 +218,18 @@ int getTargetRGBValue(uint universe)
         DMXChannel = targetColor > 0 ? DMXChannel %(520*3) : DMXChannel;
 
         uint x = ((DMXChannel-1) % 13) +1; // starts at 1 ends at 13
-        half y = ceil(DMXChannel / 13.0) - 1; // starts at 1 // doubles as sector
+        uint y = ceil(DMXChannel / 13.0) - 1; // starts at 1 // doubles as sector
         
-        if(false && x == 13.0 && _EnableCompatibilityMode == 1) //for the 13th channel of each sector... Go down a sector for these DMX Channel Ranges...
+        //if(x == 13.0) - Moved inline //for the 13th channel of each sector... Go down a sector for these DMX Channel Ranges...
         {
         
             //I don't know why, but we need this for some reason otherwise the 13th channel gets shifted around improperly.
-            //I"m not sure how to express these exception ranges mathematically. Doing so would be much more cleaner though.
-            y = DMXChannel >= 90 && DMXChannel <= 101 ? y - 1 : y;
-            y = DMXChannel >= 160 && DMXChannel <= 205 ? y - 1 : y;
-            y = DMXChannel >= 326 && DMXChannel <= 404 ? y - 1 : y;
-            y = DMXChannel >= 676 && DMXChannel <= 819 ? y - 1 : y;
-            y = DMXChannel >= 1339 ? y - 1 : y;
+            //I'm not sure how to express these exception ranges mathematically. Doing so would be much more cleaner though.
+            y = x == 13 &&DMXChannel >= 90 && DMXChannel <= 101 ? y - 1 : y;
+            y = x == 13 &&DMXChannel >= 160 && DMXChannel <= 205 ? y - 1 : y;
+            y = x == 13 &&DMXChannel >= 326 && DMXChannel <= 404 ? y - 1 : y;
+            y = x == 13 &&DMXChannel >= 676 && DMXChannel <= 819 ? y - 1 : y;
+            y = x == 13 &&DMXChannel >= 1339 ? y - 1 : y;
         }
 
         // y = (y > 6 && y < 31) && x == 13.0 ? y - 1 : y;
@@ -243,19 +243,11 @@ int getTargetRGBValue(uint universe)
 #else
         float4 c = _Tex.SampleLevel(VRSL_PointClampSampler, xyUV, 0);
 #endif
-        float value = 0.0;
+        float value = (!getNineUniverseMode() || _EnableCompatibilityMode == 1)
+    ? LinearRgbToLuminance(c.rgb)
+        : (targetColor > 0 ? ((targetColor > 1) ? c.b : c.g) : c.r)
+            ;
         
-    if(getNineUniverseMode() && _EnableCompatibilityMode != 1)
-    {
-        value = c.r;
-        value = IF(targetColor > 0, c.g, value);
-        value = IF(targetColor > 1, c.b, value);
-    }
-    else
-    {
-            float3 cRGB = float3(c.r, c.g, c.b);
-            value = LinearRgbToLuminance(cRGB);
-        }
         return value;
     }
 
