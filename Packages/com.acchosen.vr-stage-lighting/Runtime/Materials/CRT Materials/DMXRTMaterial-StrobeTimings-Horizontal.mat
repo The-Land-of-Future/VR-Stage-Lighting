@@ -13,7 +13,8 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _VRSL_STATICFREQUENCIES
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _NINEUNIVERSEMODE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -42,7 +43,7 @@ Material:
     - _LowFrequency: 25
     - _MaxStrobeFreq: 185
     - _MedFrequency: 45
-    - _NineUniverseMode: 0
+    - _NineUniverseMode: 1
     - _SmoothValue: 0.5
     - _StrobeType: 1
     m_Colors: []
