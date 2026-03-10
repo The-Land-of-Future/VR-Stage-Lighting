@@ -44,7 +44,7 @@ int _IsEven;
     float4 _DecorativeEmissiveMap_ST;
 #endif
 
-
+float _VRChatMirrorMode;
 half4 _Color;
 half _Metallic;
 half _Glossiness;

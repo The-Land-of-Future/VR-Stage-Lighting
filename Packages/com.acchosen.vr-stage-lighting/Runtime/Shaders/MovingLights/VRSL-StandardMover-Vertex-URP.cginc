@@ -705,10 +705,9 @@ v2f vert(appdata v)
     //Volumetric Part - Vertex Shader
     #if defined(VOLUMETRIC_YES)
 			o.pos = UnityObjectToClipPos(v.vertex);
+	o.screenPos = half4(0,0,0,0);
     #if _USE_DEPTH_LIGHT
-				o.screenPos = ComputeScreenPos (o.pos);
-    #else
-				o.screenPos = half4(0,0,0,0);
+				o.screenPos = _VRChatMirrorMode == 0 ? ComputeScreenPos (o.pos) : o.screenPos;
     #endif
 			o.uvClone = v.uv2;
     #ifdef _HQ_MODE
@@ -719,16 +718,16 @@ v2f vert(appdata v)
 			o.uv = TRANSFORM_TEX(v.uv, _LightMainTex);
 			//o.uv = UnityStereoScreenSpaceUVAdjust(uv, sb)
     #if _USE_DEPTH_LIGHT
-				COMPUTE_EYEDEPTH(o.screenPos.z);
+				if (_VRChatMirrorMode == 0) COMPUTE_EYEDEPTH(o.screenPos.z);
     #endif
 			UNITY_TRANSFER_FOG(o,o.vertex);
 			o.worldPos = mul(unity_ObjectToWorld, v.vertex);
 
 			//For Mirror Depth Correction
     #if _USE_DEPTH_LIGHT
-				o.worldDirection.xyz = o.worldPos.xyz - _WorldSpaceCameraPos;
+				o.worldDirection.xyz = _VRChatMirrorMode == 0 ? o.worldPos.xyz - _WorldSpaceCameraPos : half3(0,0,0);
 				// pack correction factor into direction w component to save space
-				o.worldDirection.w = dot(o.pos, CalculateFrustumCorrection());
+				o.worldDirection.w = _VRChatMirrorMode == 0 ? dot(o.pos, CalculateFrustumCorrection()) : 0;
     #else
 				o.worldDirection = half4(0,0,0,0);
     #endif

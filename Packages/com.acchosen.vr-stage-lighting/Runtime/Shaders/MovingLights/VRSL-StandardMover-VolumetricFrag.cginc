@@ -137,8 +137,10 @@ half4 VolumetricLightingBRDF(v2f i, fixed facePos)
 		
 		//CREDIT TO DJ LUKIS FOR MIRROR DEPTH CORRECTION
 		//Get Screen Pos UVs
+		half intersectionFade = 1.0;
 		//float perspectiveDivide = 1.0f / i.pos.w;
 		#ifdef _USE_DEPTH_LIGHT
+		{
 			float4 direction = i.worldDirection * (1.0f / i.pos.w);
 			float2 screenUV = i.screenPos.xy / i.screenPos.w;
 			//Sampling Depth
@@ -155,10 +157,9 @@ half4 VolumetricLightingBRDF(v2f i, fixed facePos)
 
 
 			//Attempt to fade cone away when intersecting with another object
-			float intersectionFade = saturate(((depth * _ProjectionParams.z) - i.screenPos.w));
-			intersectionFade = lerp(1, intersectionFade, saturate(i.uv.x * _FadeAmt));
-		#else
-			half intersectionFade = 1.0;
+			intersectionFade = _VRChatMirrorMode == 0 ? saturate(((depth * _ProjectionParams.z) - i.screenPos.w)) : intersectionFade;
+			intersectionFade = _VRChatMirrorMode == 0 ? lerp(1, intersectionFade, saturate(i.uv.x * _FadeAmt)) : intersectionFade;
+		}
 		#endif
 		//Attempt to fade cone away when intersecting with the camera.
 		//float cameraFade = i.camAngleCamfade.y;
