@@ -40,6 +40,7 @@ namespace VRSL
         private int EnableStrobe = PropertyToIdClass.PropertyToID("_EnableStrobe");
         private int EnableSpin = PropertyToIdClass.PropertyToID("_EnableSpin");
         private int EnableDmx = PropertyToIdClass.PropertyToID("_EnableDMX");
+        private int EnableFineChannels = PropertyToIdClass.PropertyToID("_EnableFineChannels");
         private int ProjectionSelection = PropertyToIdClass.PropertyToID("_ProjectionSelection");
         private int FixtureRotationX = PropertyToIdClass.PropertyToID("_FixtureRotationX");
         private int FixtureBaseRotationY = PropertyToIdClass.PropertyToID("_FixtureBaseRotationY");
@@ -58,6 +59,7 @@ namespace VRSL
         [Header("DMX Settings")]
         [Tooltip ("Enables DMX mode for this fixture.")]
         public bool enableDMXChannels = true;
+        public bool enableFineChannels = false;
         [Tooltip ("The ID number for this fixture. This is mostly for organizational purposes and is entirely optional. Most DMX software have an ID attached to each fixture to run the fixtures through commands more easily, and it is recommended to have those IDs lined up here as well for the sake simplicity. This ID is public and can also be used for Udon scripting as well.")]
         public int fixtureID;
         [Tooltip ("The industry standard DMX Channel this fixture begins on. Most standard VRSL fixtures are 13 channels")]
@@ -182,6 +184,7 @@ namespace VRSL
             EnableStrobe = PropertyToIdClass.PropertyToID("_EnableStrobe");
             EnableSpin = PropertyToIdClass.PropertyToID("_EnableSpin");
             EnableDmx = PropertyToIdClass.PropertyToID("_EnableDMX");
+            EnableFineChannels = PropertyToIdClass.PropertyToID("_EnableFineChannels");
             ProjectionSelection = PropertyToIdClass.PropertyToID("_ProjectionSelection");
             FixtureRotationX = PropertyToIdClass.PropertyToID("_FixtureRotationX");
             FixtureBaseRotationY = PropertyToIdClass.PropertyToID("_FixtureBaseRotationY");
@@ -358,6 +361,7 @@ namespace VRSL
             props.SetInt(EnableStrobe, enableStrobe == true ? 1 : 0);
             props.SetInt(EnableSpin, enableAutoSpin == true ? 1 : 0);
             props.SetInt(EnableDmx, enableDMXChannels == true ? 1 : 0);
+            props.SetInt(EnableFineChannels, enableFineChannels == true ? 1 : 0);
             props.SetInt(ProjectionSelection, selectGOBO);
             props.SetFloat(FixtureRotationX, tiltOffsetBlue);
             props.SetFloat(FixtureBaseRotationY, panOffsetBlueGreen);
@@ -458,6 +462,7 @@ namespace VRSL
             props.SetInt(EnableStrobe, 0);
             props.SetInt(EnableSpin, enableAutoSpin == true ? 1 : 0);
             props.SetInt(EnableDmx, 0);
+            props.SetInt(EnableFineChannels, 0);
             props.SetInt(ProjectionSelection, selectGOBO);
             props.SetFloat(FixtureRotationX, tiltOffsetBlue);
             props.SetFloat(FixtureBaseRotationY, panOffsetBlueGreen);
@@ -710,6 +715,18 @@ namespace VRSL
             set
             {
                 enableDMXChannels = value;
+                _UpdateInstancedProperties();
+            }
+        }
+        public bool allowFineChannels
+        {
+            get
+            {
+                return enableFineChannels;
+            }
+            set
+            {
+                enableFineChannels = value;
                 _UpdateInstancedProperties();
             }
         }

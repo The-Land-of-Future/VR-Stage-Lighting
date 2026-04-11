@@ -134,7 +134,7 @@ Shader "VRSL/AudioLink/Standard Mover/Projection"
     {
         Tags
         {
-            "Queue" = "Transparent+1" "IgnoreProjector"="True" "RenderType" = "Transparent" "RenderingPipeline" = "UniversalPipeline"
+            "Queue" = "Transparent+1" "IgnoreProjector"="True" "RenderType" = "Transparent" "RenderPipeline" = "UniversalPipeline"
         }
         Pass
         {

@@ -71,7 +71,7 @@
     {
         Tags
         {
-            "RenderType"="Transparent" "Queue" = "Transparent+200" "RenderingPipeline" = "UniversalPipeline"
+            "RenderType"="Transparent" "Queue" = "Transparent+200" "RenderPipeline" = "UniversalPipeline"
         }
         LOD 100
 
